@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <%- include('partials/head'); %>
+<body>
+    <div class="title">czas czas czas</div>
+    <div class="container">
+        <div class="container__inner">
+            <div class="container__detail"></div>
+            <div class="container__title">Napisz na co czekasz</div>
+        </div>
+        <label for="event-name">Nazwij wydarzenie</label>
+        <input type="text" name="event-name" id="event-name">
+        <button class="button">Przejdź dalej</button>
+    </div>
+    <div class="container">
+        <div class="container__inner">
+            <div class="container__detail"></div>
+            <div class="container__title">Zaznacz dzień</div>
+        </div>
+        <div class="calendar"></div>
+        <button class="button">Przejdź dalej</button>
+    </div>
+    <div class="container">
+        <div class="container__inner">
+            <div class="container__detail"></div>
+            <div class="container__title">Podsumowanie</div>
+        </div>
+        <p class="text text--big">To już ostani krok, zerknij jeszcze tylko raz na szczegóły.</p>
+
+        <div class="summary">
+            <div class="summary__text">Nazwa Twojego wydarzenia:</div>
+            <div class="summary__event-name">Ślub</div>
+        </div>
+
+        <div class="summary">
+            <div class="summary__text">Data wydarzenia:</div>
+            <div class="summary__event-date">01.07.2023</div>
+        </div>
+        <button class="button">Zapisz</button>
+    </div>
+</body>
+</html>
