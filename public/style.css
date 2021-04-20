@@ -1,0 +1,84 @@
+*{
+    font-family: "Montserrat";
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+}
+.input{
+    background-color: #FAF9F9;
+    border: 0px;
+    color: #64A6BD;
+    font-size: 48px;
+}
+.button{
+    color: #FFC839;
+    font-size: 36px;
+    background-color: #fff0;
+    border: 0px;
+}
+.wrapper{
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+.title{
+    width: 3000px;
+    opacity: 8%;
+    font-size: 288px;
+    color: #ADA7C9;
+    user-select: none;
+    z-index: -5;
+    letter-spacing: 5px;
+    line-height: 1;
+}
+.box{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto 400px 0;
+}
+.box__button{
+    margin: 0 0 0 auto;
+}
+.box__wrapper{
+    display: flex;
+}
+.box__wrapper-second{
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0 50px 35%;
+}
+.box__mark{
+    width: 50px;
+}
+.box__mark--event-name{
+    background-color: #64A6BD;
+}
+.box__mark--calendar{
+    background-color: #E00000;
+}
+.box__mark--event-summary{
+    background-color: #8692B9;
+}
+.box__title{    
+    font-size: 72px;
+    color: #555B6E;
+}
+.box__summary{
+    margin: 50px 0 100px 0;
+}
+.summary{
+    width: 70%;
+}
+.text{
+    color: #555B6E;
+}
+.text--big{
+    font-size: 48px;
+}
+.text--medium{
+    font-size: 32px;
+}
+.text--highlight{
+    color: #64A6BD;
+}
