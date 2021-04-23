@@ -7,7 +7,6 @@ class Calendar{
         this._dayjs = dayjs();
         this._selectedDay;
         this._DOMcalendar = document.querySelector('.calendar');
-        this._holiday = 0;
         this._holidays = this.allHolidays();
     }
     startDay(){ return this._dayjs.startOf('month').weekday(); }
@@ -92,14 +91,12 @@ class Calendar{
         for(let holiday of this._holidays){
             if(holiday.date.includes(day.dataset.date)){
                 day.classList.add('calendar__day--holiday');
-                this._holiday++;
             }
         }
     }
     markIfWeekend(day){
         if(this._dayjs.weekday() === 5 || this._dayjs.weekday() === 6){
             day.classList.add('calendar__day--weekend');
-            this._holiday++;
         }
     }
     markCurrentDay(day){
