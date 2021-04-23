@@ -89,6 +89,8 @@ class Calendar{
     }
     markIfHoliday(day){
         for(let holiday of this._holidays){
+            // console.log('holiday.date', holiday.date);
+            // console.log('day.dataset.date', day.dataset.date);
             if(holiday.date.includes(day.dataset.date)){
                 day.classList.add('calendar__day--holiday');
             }
@@ -177,17 +179,23 @@ class Calendar{
         ]
     }
     changeMonth(){
-        let DOMpreviousMonth = document.querySelector('.calendar__previous');
-        let DOMnextMonth = document.querySelector('.calendar__next');
+        const DOMpreviousMonth = document.querySelector('.calendar__previous');
+        const DOMnextMonth = document.querySelector('.calendar__next');
         const monthName = document.querySelector('.calendar__month-name');
         let currentMonth = true;
+        let currentYear = this._dayjs.year();
         let XYZres;
 
         DOMpreviousMonth.addEventListener('mousedown', e => {
             if(!dayjs().isSame(this._dayjs, 'month')){
+
+                if(currentYear != this._dayjs.year()){
+                    this._holidays = this.allHolidays();
+                    currentYear = this._dayjs.year();
+                }
                 XYZres = this.monthStructure(this._dayjs.subtract(1, 'month'));
                 currentMonth = false;
-                console.log(XYZres);
+
             }
             else{
                 currentMonth = true;
@@ -209,6 +217,11 @@ class Calendar{
            
             XYZres = this.monthStructure(this._dayjs.add(1, 'month'));
             console.log(XYZres);
+            if(currentYear != this._dayjs.year()){
+                console.log("XXX");
+                this._holidays = this.allHolidays();
+                currentYear = this._dayjs.year();
+            }
             
         });
         DOMnextMonth.addEventListener('mouseup', () => {
