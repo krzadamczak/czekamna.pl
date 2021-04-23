@@ -83,49 +83,12 @@
     color: #64A6BD;
 }
 
-.calendar{
-    background-color: #fff;
-    padding: 20px 0;
-}
-.calendar__inner{
-    display: flex;
-    margin: 0 auto 25px auto;
-    justify-content: center;
-    align-items: center;
-}
-.calendar__inner2{
-    overflow: hidden;
-    width: 135px;
-}
-.calendar__change-year{
-    display: flex;
-    transition: all .2s ease-in-out;
-    width: max-content;
-    margin: auto;
-}
 .calendar__previous, .calendar__next {
     user-select: none;
     cursor: pointer;
     font-size: 24px;
     color: #FFC839;
     font-weight: 300;
-}
-.calendar__item{
-    cursor: pointer;
-    width: 65px;
-    margin: 0px 35px;
-}
-.calendar__other-year{
-    color: #d8d8d8;
-    font-size: 26px;    
-    transition: all .2s ease-in-out;
-    transform: scale(0);
-}
-.calendar__current-year{
-    font-size: 26px;
-    transition: all .2s ease-in-out;
-    color: #797775;
-    text-align: center;
 }
 
 .calendar__navigation {
@@ -142,6 +105,8 @@
 .calendar__month-name {
     font-size: 24px;
     margin: 0 50px;
+    width: 220px;
+    text-align: center;
 }
 .calendar__days-of-week{
     display: grid;
@@ -168,10 +133,7 @@
     color: #ffc839 !important;
 }
 .calendar__day--selected{
-    border: 2px solid #a723ff;
-    border-radius: 50px;
-    background-color: #CE93D8;
-    color: #fff !important;
+    color: #64A6BD !important;
 }
 .calendar__day--weekend{
     color: #ff3b3b;
@@ -180,11 +142,6 @@
 .calendar__day--holiday{
     color: #00c4ff;
     font-weight: 500;
-}
-.message{
-    text-align: center;
-    font-size: 24px;
-    padding: 60px 0;
 }
 .startOnMon{
     grid-column: 1;
