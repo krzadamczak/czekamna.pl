@@ -8,10 +8,7 @@ class Calendar{
         this._selectedDay;
         this._DOMcalendar = document.querySelector('.calendar');
         this._holiday = 0;
-        this._offset = 0;
-        this._changeYearListenerReference;
         this._holidays = this.allHolidays();
-        this._eventDetailsVisible = false;
     }
     startDay(){ return this._dayjs.startOf('month').weekday(); }
 
@@ -241,8 +238,6 @@ class Calendar{
     }
     init(){
         const result = document.createDocumentFragment();
-
-
 
         result.append(this.navigation());
         result.append(this.monthStructure(dayjs()));
