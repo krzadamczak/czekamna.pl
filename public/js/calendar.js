@@ -184,7 +184,7 @@ class Calendar{
         const monthName = document.querySelector('.calendar__month-name');
         let currentMonth = true;
         let currentYear = this._dayjs.year();
-        let XYZres;
+        let result;
 
         DOMpreviousMonth.addEventListener('mousedown', e => {
             if(!dayjs().isSame(this._dayjs, 'month')){
@@ -193,7 +193,7 @@ class Calendar{
                     this._holidays = this.allHolidays();
                     currentYear = this._dayjs.year();
                 }
-                XYZres = this.monthStructure(this._dayjs.subtract(1, 'month'));
+                result = this.monthStructure(this._dayjs.subtract(1, 'month'));
                 currentMonth = false;
 
             }
@@ -203,20 +203,19 @@ class Calendar{
         });
         DOMpreviousMonth.addEventListener('mouseup', e => {
             if(!currentMonth){
-                let test = document.querySelector('.calendar__grid');
-                test.remove();
-                this.addDaysListener();
-    
-                this._DOMcalendar.appendChild(XYZres);
+                let calendarGrid = document.querySelector('.calendar__grid');
+                calendarGrid.remove();    
+                this._DOMcalendar.appendChild(result);
                 monthName.innerHTML = `${this._dayjs.format('MMMM, YYYY')}`;
                 this.addDaysListener();
             }
         });
+
+
         DOMnextMonth.addEventListener('mousedown', e => {
 
-           
-            XYZres = this.monthStructure(this._dayjs.add(1, 'month'));
-            console.log(XYZres);
+            result = this.monthStructure(this._dayjs.add(1, 'month'));
+
             if(currentYear != this._dayjs.year()){
                 console.log("XXX");
                 this._holidays = this.allHolidays();
@@ -225,17 +224,21 @@ class Calendar{
             
         });
         DOMnextMonth.addEventListener('mouseup', () => {
-            let test = document.querySelector('.calendar__grid');
-            test.remove();
+            let calendarGrid = document.querySelector('.calendar__grid');
 
-            this._DOMcalendar.appendChild(XYZres);
+            calendarGrid.remove();
+
+            this._DOMcalendar.appendChild(result);
+
             monthName.innerHTML = `${this._dayjs.format('MMMM, YYYY')}`;
+
             this.addDaysListener();
         });
     }
    
     addDaysListener(){
         const days = document.querySelectorAll('.calendar__day'); 
+        console.log(days);
         const dayListenerReference = this.dayListener.bind(this);
         for(let day of days){
             day.addEventListener('click', dayListenerReference);
