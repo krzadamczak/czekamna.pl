@@ -1,5 +1,3 @@
-//TODO Uporządkować cały kod!
-
 dayjs.locale('pl');
 dayjs.extend(window.dayjs_plugin_weekday);
 class Calendar{
@@ -9,17 +7,14 @@ class Calendar{
         this._DOMcalendar = document.querySelector('.calendar');
         this._holidays = this.allHolidays();
     }
-    startDay(){ return this._dayjs.startOf('month').weekday(); }
+    init(){
+        const result = document.createDocumentFragment();
 
-    monthStructure(dayjs){
-        const result = createElement('div', 'calendar__grid');
+        result.append(this.navigation());
+        result.append(this.monthStructure(this._dayjs));
 
-        this._dayjs = dayjs;
-
-        result.append(this.daysOfWeek());
-        result.append(this.days());
-
-        return result;
+        this._DOMcalendar.appendChild(result);
+        this.addListeners();
     }
     navigation(){
         const result = createElement('div', 'calendar__navigation');
@@ -37,6 +32,17 @@ class Calendar{
 
         return result;
     }
+    monthStructure(dayjs){
+        const result = createElement('div', 'calendar__grid');
+
+        this._dayjs = dayjs;
+
+        result.append(this.daysOfWeek());
+        result.append(this.days());
+
+        return result;
+    }
+
     daysOfWeek(){
         const result = createElement('div', 'calendar__days-of-week');
         const weekdays = ['P', 'W', 'Ś', 'C', 'P', 'S', 'N'];
@@ -75,22 +81,9 @@ class Calendar{
 
         return result;
     }
-    dayListener(e){
-        console.log(e.target);
-        if(this._selectedDay === undefined){
-            this._selectedDay = e.target;
-            this._selectedDay.classList.add('calendar__day--selected');
-        }
-        else{
-            this._selectedDay.classList.remove('calendar__day--selected');
-            this._selectedDay = e.target;
-            this._selectedDay.classList.add('calendar__day--selected');
-        }
-    }
+
     markIfHoliday(day){
         for(let holiday of this._holidays){
-            // console.log('holiday.date', holiday.date);
-            // console.log('day.dataset.date', day.dataset.date);
             if(holiday.date.includes(day.dataset.date)){
                 day.classList.add('calendar__day--holiday');
             }
@@ -178,6 +171,30 @@ class Calendar{
             }
         ]
     }
+    addListeners(){
+        this.addDaysListener();
+        this.changeMonth();
+    }
+    addDaysListener(){
+        const days = document.querySelectorAll('.calendar__day'); 
+        const dayListenerReference = this.dayListener.bind(this);
+
+        for(let day of days){
+            day.addEventListener('click', dayListenerReference);
+        }
+    }
+    dayListener(e){
+
+        if(this._selectedDay === undefined){
+            this._selectedDay = e.target;
+            this._selectedDay.classList.add('calendar__day--selected');
+        }
+        else{
+            this._selectedDay.classList.remove('calendar__day--selected');
+            this._selectedDay = e.target;
+            this._selectedDay.classList.add('calendar__day--selected');
+        }
+    }
     changeMonth(){
         const DOMpreviousMonth = document.querySelector('.calendar__previous');
         const DOMnextMonth = document.querySelector('.calendar__next');
@@ -235,29 +252,7 @@ class Calendar{
             this.addDaysListener();
         });
     }
-   
-    addDaysListener(){
-        const days = document.querySelectorAll('.calendar__day'); 
-        console.log(days);
-        const dayListenerReference = this.dayListener.bind(this);
-        for(let day of days){
-            day.addEventListener('click', dayListenerReference);
-        }
-    }
-
-    addListeners(){
-        this.addDaysListener();
-        this.changeMonth();
-    }
-    init(){
-        const result = document.createDocumentFragment();
-
-        result.append(this.navigation());
-        result.append(this.monthStructure(dayjs()));
-
-        this._DOMcalendar.appendChild(result);
-        this.addListeners();
-    }
+    startDay(){ return this._dayjs.startOf('month').weekday(); }
 }
 
 const calendar = new Calendar();
