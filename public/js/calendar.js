@@ -54,9 +54,9 @@ class Calendar{
             item.appendChild(document.createTextNode(weekdays[i]));
             frag.append(item);
         }
-        result.append(frag);
-
-        return result;
+        // result.append(frag);
+        console.log(frag);
+        return frag;
     }
     days(){
         const result = document.createDocumentFragment();

@@ -1,19 +1,35 @@
+:root{
+    --massive-font-size: 72px;
+    --big-font-size: 48px;
+    --medium-font-size: 36px;
+    --small-font-size: 28px;
+    --main-font-color: #555B6E;
+    --yellow-font-color: #FFC839;
+    --blue-font-color: #64A6BD;
+}
 *{
     font-family: "Montserrat";
+    font-weight: 700;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-weight: 700;
+}
+.label{
+    font-size: var(--medium-font-size);
+    color: var(--main-font-color);
 }
 .input{
-    background-color: #FAF9F9;
-    border: 0px;
-    color: #64A6BD;
-    font-size: 48px;
+    background-color: #f7f7f7;
+    border: 1px solid #efefef;
+    color: var(--blue-font-color);
+    font-weight: 600;
+    font-size: var(--medium-font-size);
+    padding: 15px;
+    margin: 30px 0;
 }
 .button{
-    color: #FFC839;
-    font-size: 36px;
+    font-size: var(--medium-font-size);
+    color: var(--yellow-font-color);
     background-color: #fff0;
     border: 0px;
 }
@@ -43,10 +59,10 @@
 .box__wrapper{
     display: flex;
 }
-.box__wrapper-second{
+.box__wrapper-second, .summary{
     display: flex;
     flex-direction: column;
-    margin: 50px 0 50px 35%;
+    margin: 100px 200px;
 }
 .box__mark{
     width: 50px;
@@ -61,8 +77,8 @@
     background-color: #8692B9;
 }
 .box__title{    
-    font-size: 72px;
-    color: #555B6E;
+    font-size: var(--massive-font-size);
+    color: var(--main-font-color);
 }
 .box__summary{
     margin: 50px 0 100px 0;
@@ -70,25 +86,22 @@
 .summary{
     width: 70%;
 }
-.text{
-    color: #555B6E;
+.summary__title{
+    font-size: var(--big-font-size);
+    color: var(--main-font-color);
 }
-.text--big{
-    font-size: 48px;
+.summary__text{
+    font-size: var(--medium-font-size);
+    color: var(--main-font-color);
 }
-.text--medium{
-    font-size: 32px;
+.summary__text--highlight{
+    color: var(--blue-font-color);
 }
-.text--highlight{
-    color: #64A6BD;
-}
-
 .calendar__previous, .calendar__next {
     user-select: none;
     cursor: pointer;
-    font-size: 24px;
-    color: #FFC839;
-    font-weight: 300;
+    font-size: var(--medium-font-size);
+    color: var(--yellow-font-color);
 }
 
 .calendar__navigation {
@@ -100,18 +113,16 @@
 .calendar__grid{
     display: grid;
     grid-template-columns: repeat(7, minmax(50px, 1fr));
+    font-size: var(--small-font-size);
+    color: var(--main-font-color);
     text-align: center;
 }
 .calendar__month-name {
-    font-size: 24px;
+    font-size: var(--medium-font-size);
+    color: var(--main-font-color);
     margin: 0 50px;
-    width: 220px;
+    width: 300px;
     text-align: center;
-}
-.calendar__days-of-week{
-    display: grid;
-    grid-column: span 7;    
-    grid-template-columns: repeat(7, 1fr);
 }
 .calendar__day{
     cursor: pointer;
@@ -125,9 +136,6 @@
     line-height: 1;
     justify-content: center;
     align-items: center;
-    font-weight: 600;
-    color: #555B6E;
-    font-size: 22px;
 }
 .calendar__day--current{
     color: #ffc839 !important;

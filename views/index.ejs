@@ -12,9 +12,9 @@
         </div>
         
         <div class="box__wrapper-second">
-            <label class="text box__text" for="event-name">Nazwij wydarzenie</label>
-            <input type="text" name="event-name" id="event-name" class="input">
-            <button class="button box__button">Przejdź dalej</button>
+            <label class="label" for="event-name">Nazwij wydarzenie</label>
+            <input class="input" type="text" name="event-name" id="event-name">
+            <button class="button box__button text text--medium">Przejdź dalej</button>
         </div>
     </div>
     <div class="box">
@@ -35,20 +35,20 @@
             <div class="box__title">Podsumowanie.</div>
         </div>
         
-        <div class="box__wrapper-second">
-            <p class="summary box__summary text text--big">To już ostani krok, zerknij jeszcze tylko raz na szczegóły.</p>
-    
-            <div class="box__wrapper-third">
-                <div class="text text--medium">Nazwa Twojego wydarzenia:</div>
-                <div class="text text--medium text--highlight">Ślub</div>
+        <div class="summary">
+            <div class="summary__title">To już ostani krok, zerknij jeszcze tylko raz na szczegóły.</div>
+
+            <div class="summary__wrapper">
+                <div class="summary__text">Nazwa Twojego wydarzenia:</div>
+                <div class="summary__text summary__text--highlight">Ślub</div>
             </div>
     
-            <div class="box__wrapper-third">
-                <div class="text text--medium">Data wydarzenia:</div>
-                <div class="text text--medium text--highlight">01.07.2023</div>
+            <div class="summary__wrapper">
+                <div class="summary__text">Data wydarzenia:</div>
+                <div class="summary__text summary__text--highlight">01.07.2023</div>
             </div>
             <button class="button box__button">Zapisz</button>
-        </div>
+        </div>            
     </div>
     <script src="js/util/createElement.js"></script>
     <script src="js/calendar.js"></script>
