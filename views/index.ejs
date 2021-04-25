@@ -13,7 +13,7 @@
         
         <div class="box__wrapper-second">
             <label class="label" for="event-name">Nazwij wydarzenie</label>
-            <input class="input" type="text" name="event-name" id="event-name">
+            <input class="input" type="text" name="event-name" id="event-name-input">
             <button class="button box__button text text--medium">Przejdź dalej</button>
         </div>
     </div>
@@ -40,17 +40,18 @@
 
             <div class="summary__wrapper">
                 <div class="summary__text">Nazwa Twojego wydarzenia:</div>
-                <div class="summary__text summary__text--highlight">Ślub</div>
+                <div id="event-name" class="summary__text summary__text--highlight"></div>
             </div>
     
             <div class="summary__wrapper">
                 <div class="summary__text">Data wydarzenia:</div>
-                <div class="summary__text summary__text--highlight">01.07.2023</div>
+                <div id="event-date-summary" class="summary__text summary__text--highlight"></div>
             </div>
             <button class="button box__button">Zapisz</button>
         </div>            
     </div>
     <script src="js/util/createElement.js"></script>
     <script src="js/calendar.js"></script>
+    <script src="js/summary.js"></script>
 </body>
 </html>
