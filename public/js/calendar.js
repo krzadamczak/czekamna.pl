@@ -52,6 +52,7 @@ class Calendar{
         for(let i = 0; i < 7; i++){
             item = document.createElement('div');
             item.appendChild(document.createTextNode(weekdays[i]));
+            item.classList.add('calendar__day');
             frag.append(item);
         }
         // result.append(frag);
@@ -72,9 +73,14 @@ class Calendar{
             day.appendChild(document.createTextNode(i));
             day.dataset.date = this._dayjs.format('YYYY-MM-DD');
 
-            this.markIfWeekend(day);
-            this.markIfHoliday(day);
-            this.markCurrentDay(day);
+            if(this._dayjs.isBefore(dayjs(), 'date')){
+                day.classList.add('calendar__day--past');
+            }
+            else{
+                this.markIfWeekend(day);
+                this.markIfHoliday(day);
+                this.markCurrentDay(day);
+            }
 
             result.append(day);
         }
