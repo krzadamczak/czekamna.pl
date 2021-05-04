@@ -198,8 +198,7 @@ class Calendar{
             this._selectedDay = e.target;
             this._selectedDay.classList.add('calendar__day--selected');
         }
-        e.target.dispatchEvent(event);
-        // this._selectedDay.dispatchEvent(event);
+        this._selectedDay.dispatchEvent(event);
     }
     changeMonth(){
         const DOMpreviousMonth = document.querySelector('.calendar__previous');

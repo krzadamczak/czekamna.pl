@@ -91,6 +91,9 @@
 .summary{
     width: 70%;
 }
+.summary__wrapper{
+    margin: 15px 0;
+}
 .summary__title{
     margin-bottom: 100px;
     font-size: var(--big-font-size);
@@ -102,6 +105,7 @@
 }
 .summary__text--highlight{
     color: var(--blue-font-color);
+    white-space: pre-wrap;
 }
 .calendar__previous, .calendar__next {
     user-select: none;
