@@ -151,6 +151,7 @@
 .calendar__day--past{
     color: #e4e4e4;
     text-decoration: line-through;
+    cursor: default !important;
 }
 .calendar__day--weekend{
     color: #ff3b3b;

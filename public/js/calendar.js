@@ -77,6 +77,7 @@ class Calendar{
                 day.classList.add('calendar__day--past');
             }
             else{
+                this.addDayListener(day);
                 this.markIfWeekend(day);
                 this.markIfHoliday(day);
                 this.markCurrentDay(day);
@@ -181,15 +182,12 @@ class Calendar{
         // this.addDaysListener();
         this.changeMonth();
     }
-    addDaysListener(){
-        const days = document.querySelectorAll('.calendar__day'); 
+    addDayListener(day){ 
         const dayListenerReference = this.dayListener.bind(this);
-
-        for(let day of days){
-            day.addEventListener('click', dayListenerReference);
-        }
+        day.addEventListener('click', dayListenerReference);
     }
     dayListener(e){
+        let event = new Event('daySelected', {bubbles: true});
 
         if(this._selectedDay === undefined){
             this._selectedDay = e.target;
@@ -200,6 +198,8 @@ class Calendar{
             this._selectedDay = e.target;
             this._selectedDay.classList.add('calendar__day--selected');
         }
+        e.target.dispatchEvent(event);
+        // this._selectedDay.dispatchEvent(event);
     }
     changeMonth(){
         const DOMpreviousMonth = document.querySelector('.calendar__previous');
@@ -230,7 +230,6 @@ class Calendar{
                 calendarGrid.remove();    
                 this._DOMcalendar.appendChild(result);
                 monthName.innerHTML = `${this._dayjs.format('MMMM, YYYY')}`;
-                this.addDaysListener();
             }
         });
 
@@ -254,8 +253,6 @@ class Calendar{
             this._DOMcalendar.appendChild(result);
 
             monthName.innerHTML = `${this._dayjs.format('MMMM, YYYY')}`;
-
-            this.addDaysListener();
         });
     }
     startDay(){ return this._dayjs.startOf('month').weekday(); }
