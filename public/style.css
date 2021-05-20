@@ -134,7 +134,7 @@
     font-size: var(--medium-font-size);
     color: var(--main-font-color);
     margin: 0 50px;
-    width: 300px;
+    width: 350px;
     text-align: center;
 }
 .calendar__day {
