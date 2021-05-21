@@ -7,8 +7,8 @@ let eventObj = {};
 
 
 calendarListener.addEventListener('daySelected', e => {
-    eventObj.date = dayjs(`${e.target.dataset.date}`).format('DD.MM.YYYY');
-    eventDateSummary.innerHTML = eventObj.date;
+    eventObj.date = dayjs(`${e.target.dataset.date}`).format('YYYY-MM-DD');
+    eventDateSummary.innerHTML = dayjs(`${e.target.dataset.date}`).format('DD.MM.YYYY');
 });
 
 eventNameInput.addEventListener('change', e => {

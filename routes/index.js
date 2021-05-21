@@ -7,8 +7,8 @@ router.get('/', (req, res) => {
     res.render('index');
 });
 
-router.get('/:id', (req, res) => {
-    res.render('countdown');
+router.get('/:id', countdownController.getCountdown, (req, res) => {
+    res.render('countdown', { countdown: res.locals.countdown });
 });
 
 router.post('/', countdownController.saveCountdown, (req, res) => {

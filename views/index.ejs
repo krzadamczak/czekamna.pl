@@ -20,11 +20,19 @@
     <div class="box">
         <div class="box__wrapper">
             <div class="box__mark box__mark--calendar"></div>
-            <div class="box__title">Zaznacz dzień.</div>
+            <div class="box__title">Zaznacz dzień i wpisz godzinę</div>
         </div>
         <div class="box__wrapper-second">
 
             <div class="calendar"></div>
+            <div class="hour-form box__hour-form">
+                <label class="label" for="event-name">Wpisz godzinę</label>
+                <div class="hour-form__inner">
+                    <input id="hours" type="text" class="input input--hour-form">
+                    <div class="hour-form__colon">:</div>
+                    <input id="minutes" type="text" class="input input--hour-form">
+                </div>
+            </div>
             <button class="button box__button">Przejdź dalej</button>
         </div>
     </div>
@@ -50,6 +58,7 @@
         </div>            
     </div>
     <script src="js/util/createElement.js"></script>
+    <script src="js/data_validation.js"></script>
     <script src="js/calendar.js"></script>
     <script src="js/summary.js"></script>
 </body>

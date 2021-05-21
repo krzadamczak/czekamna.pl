@@ -27,6 +27,11 @@
     padding: 15px;
     width: 50vw;
 }
+.input--hour-form{
+    width: 80px;
+    height: 80px;
+    text-align: center;
+}
 .box__input{
     margin-top: 30px;
 }
@@ -185,4 +190,22 @@
 }
 .startOnSun{
     grid-column: 7;
+}
+.hour-form {
+    display: flex;
+    flex-direction: column;
+}
+.hour-form__inner {
+    display: inline-flex;
+    align-items: baseline;
+    margin-top: 30px;
+}
+.hour-form__colon {
+    color: var(--blue-font-color);
+    font-weight: 600;
+    font-size: var(--medium-font-size);
+    padding: 0 30px;
+}
+.box__hour-form{
+    margin-top: 100px;
 }

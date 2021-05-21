@@ -1,1 +1,11 @@
-TEST
+<!DOCTYPE html>
+<html>
+<head lang="pl">
+    <%- include('partials/head'); %>
+</head>
+<body>
+    <div id="event-data" data-event-name="<%= countdown.name %>" data-event-date="<%= countdown.date %>"></div>
+    <%= countdown %>  
+    <script src="js/countdown.js"></script>
+</body>
+</html>
