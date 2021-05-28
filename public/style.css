@@ -209,3 +209,59 @@
 .box__hour-form{
     margin-top: 100px;
 }
+
+.body{
+    margin: 0 120px;
+}
+.overflow{
+    overflow: hidden;
+}
+.section{
+    display: flex;
+    flex-direction: column;
+    margin-top: 350px;
+}
+.section__title{
+    font-family: 'Noto Sans';
+    font-size: 96px;
+    color: #555B6E;
+    margin-bottom: 100px;
+    font-weight: 700;
+}
+.section__title--highlight-red{
+    color: #E00000;
+}
+.section__title--highlight-blue{
+    color: #64A6BD;
+}
+.section__event-name{
+    font-family: 'Noto Sans';
+    font-size: 144px;
+    color: #64A6BD;
+}
+.section__text{
+    font-family: 'Noto Sans';
+    font-size: 48px;
+    color: #424242;
+    text-align: justify;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.countdown{
+    display: flex;
+    justify-content: space-evenly;
+}
+.countdown__inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.countdown__number{
+    font-family: 'Noto Sans';
+    font-size: 96px;
+    color: #424242;
+}
+.countdown__time-unit{
+    font-size: 48px;
+    color: #737373;
+}

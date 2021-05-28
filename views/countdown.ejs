@@ -3,9 +3,50 @@
 <head lang="pl">
     <%- include('partials/head'); %>
 </head>
-<body>
-    <div id="event-data" data-event-name="<%= countdown.name %>" data-event-date="<%= countdown.date %>"></div>
-    <%= countdown %>  
-    <script src="js/countdown.js"></script>
+<body class="body">
+    <div class="overflow">
+        <div class="title"><%= countdown.name %></div>
+    </div>
+    <div class="section">
+        <div class="section__title">Czekasz na...</div>
+        <div class="section__event-name"><%= countdown.name %></div>
+    </div>
+    <div class="section">
+        <div class="section__title">Do dnia którego wypatrujesz zostało:</div>
+        <div class="countdown">
+            <div class="countdown__inner">
+                <div id="years" class="countdown__number">0</div>
+                <div class="countdown__time-unit">lata</div>
+            </div>
+            <div class="countdown__inner">
+                <div id="months" class="countdown__number">0</div>
+                <div class="countdown__time-unit">miesiące</div>
+            </div>
+            <div class="countdown__inner">
+                <div id="days" class="countdown__number">0</div>
+                <div class="countdown__time-unit">dni</div>
+            </div>
+            <div class="countdown__inner">
+                <div id="hours" class="countdown__number">0</div>
+                <div class="countdown__time-unit">godziny</div>
+            </div>
+            <div class="countdown__inner">
+                <div id="minutes" class="countdown__number">0</div>
+                <div class="countdown__time-unit">minuty</div>
+            </div>
+            <div class="countdown__inner">
+                <div id="seconds" class="countdown__number">0</div>
+                <div class="countdown__time-unit">sekundy</div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section__title">A gdyby tak spojrzeć na to <span class="section__title--highlight-red">inaczej</span>?</div>
+        <div class="section__text">Jeżeli jesteś kobietą przez ten czas uśmiechniesz się do kogoś 124 razy. Panom uśmiech zabłądzi na usta trochę rzadziej, około 21 razy. Niezależnie od płci zamrugasz 521 razy, i pewnie dodatkowo raz, kiedy przeczytasz to zdanie. Nabierzesz pełne płuca powietrza jakieś 40 tysięcy razy.</div>
+    </div>
+    <div class="section">
+        <div class="section__title"><span class="section__title--highlight-blue">Podziel się</span> z innymi tym, na co czekasz</div>
+    </div>
+    <script id="event-data" data-event-name="<%= countdown.name %>" data-event-date="<%= countdown.date %>" src="js/countdown.js"></script>
 </body>
 </html>

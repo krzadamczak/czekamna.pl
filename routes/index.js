@@ -8,13 +8,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', countdownController.getCountdown, (req, res) => {
+    console.log('xxx', res.locals.countdown);
     res.render('countdown', { countdown: res.locals.countdown });
 });
 
 router.post('/', countdownController.saveCountdown, (req, res) => {
-    console.log(`/${req.body.url}`);
     res.json({status: 201});
-    // res.redirect(`/${req.body.url}`);
 });
 
 module.exports = router;
