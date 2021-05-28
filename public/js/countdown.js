@@ -7,6 +7,10 @@ const countdownDays = document.getElementById('days');
 const countdownHours = document.getElementById('hours');
 const countdownMinutes = document.getElementById('minutes');
 const countdownSeconds = document.getElementById('seconds');
+const smileWoman = document.getElementById('smile-woman');
+const smileMan = document.getElementById('smile-man');
+const blink = document.getElementById('blink');
+const breath = document.getElementById('breath');
 const interval = 1000;
 
 function timer(){
@@ -21,8 +25,8 @@ function timer(){
     }
     else{
         daysLeft = eventEndDate.diff(dayjs(), 'day');
+        monthsLeft = 0;
     }
-    
 
     countdownYears.innerHTML = eventEndDate.diff(dayjs(), 'year');
     countdownMonths.innerHTML = monthsLeft % 12;
@@ -30,6 +34,10 @@ function timer(){
     countdownHours.innerHTML = eventEndDate.diff(dayjs(), 'hour') % 24;
     countdownMinutes.innerHTML = eventEndDate.diff(dayjs(), 'minute') % 60;
     countdownSeconds.innerHTML = eventEndDate.diff(dayjs(), 'second') % 60;
+    smileWoman.innerHTML = Math.ceil(eventEndDate.diff(dayjs(), 'second') / 1393);
+    smileMan.innerHTML = Math.ceil(eventEndDate.diff(dayjs(), 'second') / 10800);
+    blink.innerHTML = Math.ceil(eventEndDate.diff(dayjs(), 'second') / 4);
+    breath.innerHTML = Math.ceil(eventEndDate.diff(dayjs(), 'second') / 3);
     let t1 = performance.now();
     let delta = t1 - t0;
     setTimeout(() => timer(), interval - delta);
