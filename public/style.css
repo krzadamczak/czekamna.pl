@@ -196,7 +196,6 @@
 .calendar__day {
     user-select: none;
     display: flex;
-    width: 35px;
     height: 35px;
     line-height: 1;
     align-items: center;
@@ -306,4 +305,44 @@
 .share-link__success--visible{
     opacity: 1;
     transition: all .2s ease-in;
+}
+
+@media (max-width: 1440px){
+    .section__content{
+        width: 70%;
+    }
+}
+
+@media (max-width: 1366px){
+    .section__content{
+        width: 80%;
+    }
+    .calendar__grid{
+        gap: 50px 75px;
+    }
+}
+
+@media (max-width: 1280px){
+    .page-wrapper{
+        margin: 0px 75px;
+    }
+}
+
+@media (max-width: 1024px){
+    .page-wrapper{
+        margin: 0px 50px;
+    }
+    .section{
+        margin-top: 150px;
+    }
+    .section__content{
+        width: 100%;
+    }
+    .calendar{
+        width: auto;
+    }
+    .calendar__grid{
+        grid-template-columns: repeat(7, 1fr);
+        gap: 25px 50px;
+    }
 }
