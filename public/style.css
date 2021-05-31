@@ -91,6 +91,9 @@
     font-size: var(--medium-font-size);
     padding: 10px;
 }
+.input::placeholder, .time-form__input::placeholder{
+    color: #efefef;
+}
 .section__input{
     margin-top: 15px;
 }
@@ -133,6 +136,7 @@
     padding: 10px 20px;
     user-select: none;
     text-decoration: none;
+    cursor: pointer;
 }
 .summary__button, .input__button, .section__button{
     margin: 25px 0 0 auto;
