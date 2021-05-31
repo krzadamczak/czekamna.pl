@@ -8,47 +8,20 @@
     --blue-font-color: #64A6BD;
 }
 *{
-    font-family: "Montserrat";
-    font-weight: 700;
+    font-family: "Noto Sans";
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-.label{
-    font-size: var(--medium-font-size);
-    color: var(--main-font-color);
+.page-wrapper{
+    margin: 0 150px;
 }
-.input{
-    background-color: #f7f7f7;
-    border: 1px solid #efefef;
-    color: var(--blue-font-color);
-    font-weight: 600;
-    font-size: var(--medium-font-size);
-    padding: 15px;
-    width: 50vw;
-}
-.input--hour-form{
-    width: 80px;
-    height: 80px;
-    text-align: center;
-}
-.box__input{
-    margin-top: 30px;
-}
-.button{
-    font-size: var(--medium-font-size);
-    color: var(--yellow-font-color);
-    background-color: #fff0;
-    border: 0px;
-     cursor: pointer;
-}
-.wrapper{
+.overflow{
     overflow: hidden;
-    margin-bottom: 100px;
 }
 .title{
     width: 3000px;
-    opacity: 8%;
+    opacity: 5%;
     font-size: 288px;
     color: #ADA7C9;
     user-select: none;
@@ -56,67 +29,135 @@
     letter-spacing: 5px;
     line-height: 1;
 }
-.box{
+.highlighted-sentence{
+    font-size: 24px;
+    font-weight: 700;
+}
+.section__highlighted-sentence{
+    text-align: right;
+    margin-top: 50px;
+}
+.section{
     display: flex;
     flex-direction: column;
-    width: 80%;
-    margin: 0 auto 200px 0;
-    align-items: flex-start;
+    margin-top: 200px;
 }
-.box__button{
-    margin: 30px 0 0 auto;
+.section:first-child{
+    margin-top: 0px;
 }
-.box__wrapper{
-    display: flex;
+.section:last-child{
+    margin-bottom: 200px;
 }
-.box__wrapper-second, .summary{
+.section__content{
     display: flex;
     flex-direction: column;
-    margin: 100px 200px;
+    width: 60%;
+    margin-top: 50px;
 }
-.box__mark{
-    width: 50px;
+.section__title{
+    font-family: 'Noto Sans';
+    font-size: 48px;
+    color: #555B6E;
+    font-weight: 700;
 }
-.box__mark--event-name{
-    background-color: #64A6BD;
+.section__title--highlight-red{
+    color: #E00000;
 }
-.box__mark--calendar{
-    background-color: #E00000;
+.section__title--highlight-blue{
+    color: #64A6BD;
 }
-.box__mark--event-summary{
-    background-color: #8692B9;
+.section__event-name{
+    font-family: 'Noto Sans';
+    font-size: 144px;
+    color: #64A6BD;
 }
-.box__title{    
-    font-size: var(--massive-font-size);
+.section__text{
+    font-family: 'Noto Sans';
+    font-size: 24px;
+    color: #424242;
+    text-align: justify;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.label{
+    font-size: 24px;
     color: var(--main-font-color);
 }
-.box__summary{
-    margin: 50px 0 100px 0;
+.input, .time-form__input{
+    background-color: #f7f7f7;
+    border: 1px solid #efefef;
+    color: var(--blue-font-color);
+    font-weight: 700;
+    font-size: var(--medium-font-size);
+    padding: 10px;
+}
+.section__input{
+    margin-top: 15px;
+}
+.time-form-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+.time-form{
+    display: inline-flex;
+    align-items: baseline;
+}
+.label__time-form{
+    margin-top: 15px;
+}
+.time-form__input--hours{
+    border-right: none;
+}
+.time-form__input--minutes{
+    border-left: none;
+}
+.time-form__input{
+    width: 80px;
+    text-align: center;
+}
+.time-form__colon{
+    color: var(--blue-font-color);
+    font-weight: 700;
+    font-size: var(--medium-font-size);
+    background-color: #f7f7f7;
+    padding: 10px 30px;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+}
+.button{
+    font-size: 24px;
+    border: 0px;
+    cursor: pointer;
+    background-color: #278fcc;
+    color: #fff;
+    padding: 10px 20px;
+
+}
+.summary__button, .input__button, .section__button{
+    margin: 25px 0 0 auto;
 }
 .summary{
-    width: 70%;
+    display: flex;
+    flex-direction: column;
 }
-.summary__wrapper{
-    margin: 15px 0;
+.section__summary{
+    margin: 50px 0 100px 0;
+}
+.summary__inner{
+    margin-top: 25px;
 }
 .summary__title{
-    margin-bottom: 100px;
-    font-size: var(--big-font-size);
+    font-size: 36px;
     color: var(--main-font-color);
 }
 .summary__text{
-    font-size: var(--medium-font-size);
+    font-size: 24px;
     color: var(--main-font-color);
 }
 .summary__text--highlight{
     color: var(--blue-font-color);
     white-space: pre-wrap;
-}
-.calendar__previous, .calendar__next {
-    user-select: none;
-    cursor: pointer;
-    font-size: var(--medium-font-size);
-    color: var(--yellow-font-color);
 }
 .calendar{
     display: flex;
@@ -126,12 +167,18 @@
 .calendar__navigation {
     display: flex;
     align-items: center;
-    margin: 50px 0;
+    margin-bottom: 25px;
+}
+.calendar__previous, .calendar__next {
+    user-select: none;
+    cursor: pointer;
+    font-size: var(--medium-font-size);
+    color: var(--yellow-font-color);
 }
 .calendar__grid{
     display: grid;
     grid-template-columns: repeat(7, minmax(50px, 1fr));
-    font-size: var(--small-font-size);
+    font-size: 24px;
     color: var(--main-font-color);
     gap: 50px 100px;
 }
@@ -139,17 +186,22 @@
     font-size: var(--medium-font-size);
     color: var(--main-font-color);
     margin: 0 50px;
-    width: 350px;
+    width: 300px;
     text-align: center;
 }
 .calendar__day {
-    cursor: pointer;
     user-select: none;
     display: flex;
     width: 35px;
     height: 35px;
     line-height: 1;
     align-items: center;
+}
+.calendar__day--dayOfTheWeek{
+    font-weight: 700;
+}
+.calendar__day--clickable{
+    cursor: pointer;
 }
 .calendar__day--current{
     color: #ffc839 !important;
@@ -206,50 +258,9 @@
     font-size: var(--medium-font-size);
     padding: 0 30px;
 }
-.box__hour-form{
-    margin-top: 100px;
-}
-
-.body{
-    margin: 0 120px;
-}
-.overflow{
-    overflow: hidden;
-}
-.section{
-    display: flex;
-    flex-direction: column;
-    margin-top: 350px;
-}
-.section__title{
-    font-family: 'Noto Sans';
-    font-size: 96px;
-    color: #555B6E;
-    margin-bottom: 100px;
-    font-weight: 700;
-}
-.section__title--highlight-red{
-    color: #E00000;
-}
-.section__title--highlight-blue{
-    color: #64A6BD;
-}
-.section__event-name{
-    font-family: 'Noto Sans';
-    font-size: 144px;
-    color: #64A6BD;
-}
-.section__text{
-    font-family: 'Noto Sans';
-    font-size: 48px;
-    color: #424242;
-    text-align: justify;
-    font-weight: 400;
-    line-height: 1.5;
-}
 .countdown{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 .countdown__inner{
     display: flex;
@@ -258,10 +269,37 @@
 }
 .countdown__number{
     font-family: 'Noto Sans';
-    font-size: 96px;
+    font-size: 64px;
     color: #424242;
 }
 .countdown__time-unit{
-    font-size: 48px;
+    font-size: 24px;
     color: #737373;
+}
+.share-link{
+    display: flex;
+    width: fit-content;
+    font-size: 24px;
+}
+.share-link__url{
+    color: #c5c5c5;
+    background-color: #f7f7f7;
+    padding: 10px 20px;
+}
+.share-link__button{
+    cursor: pointer;
+    user-select: none;
+    background-color: #278fcc;
+    color: #fff;
+    padding: 10px 20px;
+}
+.share-link__success{
+    color: #278fcc;
+    padding: 10px 20px;
+    opacity: 0;
+    transition: all .2s ease-in;
+}
+.share-link__success--visible{
+    opacity: 1;
+    transition: all .2s ease-in;
 }

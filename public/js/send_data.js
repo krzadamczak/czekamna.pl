@@ -5,6 +5,7 @@ const eventNameSummary = document.getElementById('event-name');
 const eventDateSummary = document.getElementById('event-date');
 const calendarListener = document.querySelector('.calendar');
 const saveButton = document.getElementById('save');
+const timeFormColon = document.querySelector('.time-form__colon');
 let eventObj = {};
 let tempEventObj = dayjs().endOf('day').startOf('minute');
 
@@ -22,6 +23,8 @@ function validateTime(e, max){
         }
     }
 }
+
+timeFormColon.addEventListener('click', () => hoursForm.focus());
 
 hoursForm.addEventListener('input', e => {
     validateTime(e, 23);
@@ -56,7 +59,7 @@ saveButton.addEventListener('click', e => {
         eventNameSummary.innerHTML = 'Twoje wydarzenie musi mieć nazwę. Przejdź na górę strony i napisz, na co czekasz.';
     }
     else{
-        eventObj.url = Math.floor(((Math.random() * 10) * Date.now())).toString(16);
+        eventObj.urlID = Math.floor(((Math.random() * 10) * Date.now())).toString(16);
         fetch('/', {
             method: 'POST',
             headers: {
@@ -65,6 +68,6 @@ saveButton.addEventListener('click', e => {
             body: JSON.stringify(eventObj)
         }).then(res => res.json())
           .then(data => console.log(data))
-          .then(window.location.href = `/${eventObj.url}`);
+          .then(window.location.href = `/${eventObj.urlID}`);
     }
 });

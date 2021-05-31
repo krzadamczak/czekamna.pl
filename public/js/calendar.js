@@ -53,6 +53,7 @@ class Calendar{
             item = document.createElement('div');
             item.appendChild(document.createTextNode(weekdays[i]));
             item.classList.add('calendar__day');
+            item.classList.add('calendar__day--dayOfTheWeek');
             frag.append(item);
         }
         // result.append(frag);
@@ -77,6 +78,7 @@ class Calendar{
                 day.classList.add('calendar__day--past');
             }
             else{
+                day.classList.add('calendar__day--clickable');
                 this.addDayListener(day);
                 this.markIfWeekend(day);
                 this.markIfHoliday(day);

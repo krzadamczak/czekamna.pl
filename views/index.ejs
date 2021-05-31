@@ -2,60 +2,52 @@
 <html lang="pl">
     <%- include('partials/head'); %>
 <body>
-    <div class="wrapper">
+    <div class="overflow">
         <div class="title">czas czas czas</div>
     </div>
-    <div class="box">
-        <div class="box__wrapper">
-            <div class="box__mark box__mark--event-name"></div>
-            <div class="box__title">Napisz na co czekasz.</div>
+    <div class="page-wrapper">
+        <div class="section">
+            <div class="section__title"><span class="section__title--highlight-blue">Napisz</span> na co czekasz</div>
+            <div class="section__content">
+                <label class="label" for="event-name">Nazwij wydarzenie</label>
+                <input class="input section__input" type="text" name="event-name" id="event-name-input">
+                <button class="button input__button text text--medium">Przejdź dalej</button>
+            </div>
         </div>
+        <div class="section">
+            <div class="section__title"><span class="section__title--highlight-blue">Zaznacz</span> dzień i wpisz godzinę</div>
+            <div class="section__content">
+                <div class="calendar"></div>
+                <div class="time-form-wrapper">
+                    <label class="label" for="event-name">Wpisz godzinę</label>
+                    <div class="time-form label__time-form">
+                        <input id="hours" type="text" class="time-form__input time-form__input--hours">
+                        <div class="time-form__colon">:</div>
+                        <input id="minutes" type="text" class="time-form__input time-form__input--minutes">
+                    </div>
+                </div>
+                <button class="button section__button">Przejdź dalej</button>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section__title">Podsumowanie</div>
+            <div class="section__content">
+                <div class="summary">
+                    <div class="summary__title">Prawie wszystko jest gotowe, zerknij jeszcze tylko raz na szczegóły.</div>
         
-        <div class="box__wrapper-second">
-            <label class="label" for="event-name">Nazwij wydarzenie</label>
-            <input class="input box__input" type="text" name="event-name" id="event-name-input">
-            <button class="button box__button text text--medium">Przejdź dalej</button>
-        </div>
-    </div>
-    <div class="box">
-        <div class="box__wrapper">
-            <div class="box__mark box__mark--calendar"></div>
-            <div class="box__title">Zaznacz dzień i wpisz godzinę</div>
-        </div>
-        <div class="box__wrapper-second">
-
-            <div class="calendar"></div>
-            <div class="hour-form box__hour-form">
-                <label class="label" for="event-name">Wpisz godzinę</label>
-                <div class="hour-form__inner">
-                    <input id="hours" type="text" class="input input--hour-form">
-                    <div class="hour-form__colon">:</div>
-                    <input id="minutes" type="text" class="input input--hour-form">
+                    <div class="summary__inner">
+                        <div class="summary__text">Nazwa Twojego wydarzenia:</div>
+                        <div id="event-name" class="summary__text summary__text--highlight"> </div>
+                    </div>
+            
+                    <div class="summary__inner">
+                        <div class="summary__text">Data wydarzenia:</div>
+                        <div id="event-date" class="summary__text summary__text--highlight"> </div>
+                    </div>
+                    <button id="save" class="button summary__button">Zapisz</button>
                 </div>
             </div>
-            <button class="button box__button">Przejdź dalej</button>
         </div>
-    </div>
-    <div class="box">
-        <div class="box__wrapper">
-            <div class="box__mark box__mark--event-summary"></div>
-            <div class="box__title">Podsumowanie.</div>
-        </div>
-        
-        <div class="summary">
-            <div class="summary__title">To już ostani krok, zerknij jeszcze tylko raz na szczegóły.</div>
-
-            <div class="summary__wrapper">
-                <div class="summary__text">Nazwa Twojego wydarzenia:</div>
-                <div id="event-name" class="summary__text summary__text--highlight"> </div>
-            </div>
-    
-            <div class="summary__wrapper">
-                <div class="summary__text">Data wydarzenia:</div>
-                <div id="event-date" class="summary__text summary__text--highlight"> </div>
-            </div>
-            <button id="save" class="button box__button">Zapisz</button>
-        </div>            
     </div>
     <script src="js/util/createElement.js"></script>
     <script src="js/send_data.js"></script>

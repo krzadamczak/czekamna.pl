@@ -12,16 +12,39 @@ const smileMan = document.getElementById('smile-man');
 const blink = document.getElementById('blink');
 const breath = document.getElementById('breath');
 const interval = 1000;
+const copyLinkButton = document.querySelector('.share-link__button');
+const countdownLink = document.querySelector('.share-link__url').innerHTML;
+const shareLink = document.querySelector('.share-link');
+
+copyLinkButton.addEventListener('click', e => {
+    navigator.clipboard.writeText(countdownLink).then(() => {
+        if(!shareLink.querySelector('.share-link__success')){
+            let succesfullCopy = document.createElement('span');
+            succesfullCopy.append(document.createTextNode('Link został skopiowany!'));
+            succesfullCopy.classList.add('share-link__success');
+            shareLink.append(succesfullCopy);
+            window.getComputedStyle(succesfullCopy).getPropertyValue('opacity');
+            succesfullCopy.classList.add('share-link__success--visible');
+            window.setTimeout(() => {
+                window.getComputedStyle(succesfullCopy).getPropertyValue('opacity');
+                succesfullCopy.classList.remove('share-link__success--visible');
+            }, 2500);
+            window.setTimeout(() => {                
+                succesfullCopy.remove();
+            }, 3000);
+        }
+    });
+});
 
 function timer(){
     let t0 = performance.now();
     let daysLeft, monthsLeft;
     
     if(eventEndDate.isAfter(dayjs(), 'month')){
-        let daysLeftFirstMonth = dayjs().endOf('month').diff(dayjs(), 'day');
-        let daysLeftLastMonth = eventEndDate.diff(eventEndDate.startOf('month'), 'day');
+        let daysLeftFirstMonth = dayjs().endOf('month').diff(dayjs(), 'day', true);
+        let daysLeftLastMonth = eventEndDate.diff(eventEndDate.startOf('month'), 'day', true);
         monthsLeft = eventEndDate.diff(dayjs(), 'month') > 1 ? eventEndDate.diff(dayjs(), 'month') - 1 : 0;
-        daysLeft = daysLeftFirstMonth + daysLeftLastMonth;
+        daysLeft = Math.floor(daysLeftFirstMonth + daysLeftLastMonth);
     }
     else{
         daysLeft = eventEndDate.diff(dayjs(), 'day');

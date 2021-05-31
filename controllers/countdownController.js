@@ -8,8 +8,9 @@ function saveCountdown(req, res, next){
 }
 
 function getCountdown(req, res, next){
-    Countdown.findOne({url: req.params.id}, (err, doc) => {
-        res.locals.countdown = doc;
+    Countdown.findOne({urlID: req.params.id}, (err, doc) => {
+        res.locals.countdown = Object.assign(doc, { fullUrl: req.headers.host + req.baseUrl });
+        console.log('res.locals.countdown', res.locals.countdown);
         next();
     });
 }
