@@ -58,7 +58,10 @@ saveButton.addEventListener('click', e => {
     if(typeof eventObj.name === 'undefined'){
         eventNameSummary.innerHTML = 'Twoje wydarzenie musi mieć nazwę. Przejdź na górę strony i napisz, na co czekasz.';
     }
-    else{
+    if(typeof eventObj.date === 'undefined'){
+        eventDateSummary.innerHTML = 'Wybierz dzień na który czekasz.';
+    }
+    if(typeof eventObj.name !== 'undefined' && typeof eventObj.date !== 'undefined'){
         eventObj.urlID = Math.floor(((Math.random() * 10) * Date.now())).toString(16);
         fetch('/', {
             method: 'POST',
