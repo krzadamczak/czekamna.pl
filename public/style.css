@@ -2,7 +2,8 @@
     --massive-font-size: 72px;
     --big-font-size: 48px;
     --medium-font-size: 36px;
-    --small-font-size: 28px;
+    --small-font-size: 24px;
+    --tiny-font-size: 18px;
     --main-font-color: #555B6E;
     --yellow-font-color: #FFC839;
     --blue-font-color: #64A6BD;
@@ -30,7 +31,7 @@
     line-height: 1;
 }
 .highlighted-sentence{
-    font-size: 24px;
+    font-size: var(--small-font-size);
     font-weight: 700;
 }
 .section__highlighted-sentence{
@@ -55,8 +56,7 @@
     margin-top: 50px;
 }
 .section__title{
-    font-family: 'Noto Sans';
-    font-size: 48px;
+    font-size: var(--medium-font-size);
     color: #555B6E;
     font-weight: 700;
 }
@@ -67,16 +67,13 @@
     color: #64A6BD;
 }
 .section__event-name{
-    font-family: 'Noto Sans';
-    font-size: 144px;
+    font-size: max(5rem, 8vw);
     color: #64A6BD;
 }
 .section__text{
-    font-family: 'Noto Sans';
-    font-size: 24px;
+    font-size: var(--small-font-size);
     color: #424242;
     text-align: justify;
-    font-weight: 400;
     line-height: 1.5;
 }
 .label{
@@ -129,7 +126,7 @@
     border-bottom: 1px solid #efefef;
 }
 .button{
-    font-size: 24px;
+    font-size: var(--tiny-font-size);
     border: 0px;
     background-color: #278fcc;
     color: #fff;
@@ -152,11 +149,11 @@
     margin-top: 25px;
 }
 .summary__title{
-    font-size: 36px;
+    font-size: var(--medium-font-size);
     color: var(--main-font-color);
 }
 .summary__text{
-    font-size: 24px;
+    font-size: var(--small-font-size);
     color: var(--main-font-color);
 }
 .summary__text--highlight{
@@ -182,7 +179,7 @@
 .calendar__grid{
     display: grid;
     grid-template-columns: repeat(7, minmax(50px, 1fr));
-    font-size: 24px;
+    font-size: var(--tiny-font-size);
     color: var(--main-font-color);
     gap: 50px 100px;
 }
@@ -219,11 +216,9 @@
 }
 .calendar__day--weekend{
     color: #ff3b3b;
-    font-weight: 500;
 }
 .calendar__day--holiday{
     color: #00c4ff;
-    font-weight: 500;
 }
 .startOnMon{
     grid-column: 1;
@@ -257,18 +252,17 @@
 }
 .hour-form__colon {
     color: var(--blue-font-color);
-    font-weight: 600;
+    font-weight: 700;
     font-size: var(--medium-font-size);
     padding: 0 30px;
 }
 .countdown{
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(7, min-content);
+    gap: 100px;
 }
 .countdown__inner{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 .countdown__number{
     font-family: 'Noto Sans';
@@ -276,13 +270,13 @@
     color: #424242;
 }
 .countdown__time-unit{
-    font-size: 24px;
+    font-size: var(--small-font-size);
     color: #737373;
 }
 .share-link{
     display: flex;
     width: fit-content;
-    font-size: 24px;
+    font-size: var(--tiny-font-size);
 }
 .share-link__url{
     color: #c5c5c5;
@@ -301,6 +295,7 @@
     padding: 10px 20px;
     opacity: 0;
     transition: all .2s ease-in;
+    order: 2;
 }
 .share-link__success--visible{
     opacity: 1;
@@ -326,6 +321,9 @@
     .page-wrapper{
         margin: 0px 75px;
     }
+    .countdown{
+        gap: 0px 75px;
+    }
 }
 
 @media (max-width: 1024px){
@@ -345,4 +343,19 @@
         grid-template-columns: repeat(7, 1fr);
         gap: 25px 50px;
     }
+    .countdown{
+        grid-template-columns: repeat(3, min-content);
+        gap: 75px 0px;
+        justify-content: space-between;
+    }
 }
+
+/* @media (max-width: 800px){
+    .share-link{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .share-link__button{
+        order: 1;
+    }
+} */
