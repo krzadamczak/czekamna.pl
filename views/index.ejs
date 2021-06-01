@@ -15,33 +15,31 @@
             </div>
         </div>
         <div id="calendar" class="section">
-            <div class="section__title"><span class="section__title--highlight-blue">Zaznacz</span> dzień i wpisz godzinę</div>
+            <div class="section__title"><span class="section__title--highlight-red">Zaznacz</span> dzień i wpisz godzinę</div>
             <div class="section__content">
                 <div class="calendar"></div>
                 <div class="time-form-wrapper">
                     <label class="label" for="event-name">Wpisz godzinę</label>
                     <div class="time-form label__time-form">
-                        <input id="hours" type="text" class="time-form__input time-form__input--hours" placeholder="23">
+                        <input id="hours" type="text" class="time-form__input time-form__input--hours" placeholder="23" type="number" pattern="\d*">
                         <div class="time-form__colon">:</div>
-                        <input id="minutes" type="text" class="time-form__input time-form__input--minutes" placeholder="59">
+                        <input id="minutes" type="text" class="time-form__input time-form__input--minutes" placeholder="59" type="number" pattern="\d*">
                     </div>
                 </div>
                 <a class="button section__button" href="#summary">Przejdź dalej</a>
             </div>
         </div>
         <div id="summary" class="section">
-            <div class="section__title">Podsumowanie</div>
+            <div class="section__title"><span class="section__title--highlight-blue">Sprawdź</span>, czy wszystko się zgadza</div>
             <div class="section__content">
-                <div class="summary">
-                    <div class="summary__title">Prawie wszystko jest gotowe, zerknij jeszcze tylko raz na szczegóły.</div>
-        
+                <div class="summary">        
                     <div class="summary__inner">
-                        <div class="summary__text">Nazwa Twojego wydarzenia:</div>
+                        <div class="summary__text summary__text--bold">Nazwa Twojego wydarzenia:</div>
                         <div id="event-name" class="summary__text summary__text--highlight"> </div>
                     </div>
             
                     <div class="summary__inner">
-                        <div class="summary__text">Data wydarzenia:</div>
+                        <div class="summary__text summary__text--bold">Data wydarzenia:</div>
                         <div id="event-date" class="summary__text summary__text--highlight"> </div>
                     </div>
                     <button id="save" class="button summary__button">Zapisz</button>

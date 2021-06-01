@@ -81,7 +81,7 @@ class Calendar{
                 day.classList.add('calendar__day--clickable');
                 this.addDayListener(day);
                 this.markIfWeekend(day);
-                this.markIfHoliday(day);
+                // this.markIfHoliday(day);
                 this.markCurrentDay(day);
             }
 
