@@ -377,13 +377,19 @@
         font-style: var(--medium-font-size);
     }
     .calendar__grid{
+        grid-template-columns: repeat(7, 25px);
+        gap: 25px;
+        justify-content: space-between;
         font-size: 16px;
     }
     .calendar__navigation{
-        margin: 0px auto 25px auto;
+        margin: 0px 0px 25px 0px;
+        justify-content: space-between;
     }
     .calendar__month-name{
         font-size: var(--small-font-size);
+        margin: 0px;
+        width: 210px;
     }
     .label{
         font-size: var(--tiny-font-size);
