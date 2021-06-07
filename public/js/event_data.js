@@ -23,6 +23,9 @@ saveButton.addEventListener('click', e => {
 
 class EventData{
     constructor(){
+        this._hoursForm = document.getElementById('hours');
+        this._timeFormColon = document.querySelector('.time-form__colon');
+        this._minutesForm = document.getElementById('minutes');
         this._saveButton = document.getElementById('save');
         this._eventNameSummary = document.getElementById('event-name');
         this._eventDateSummary = document.getElementById('event-date');
@@ -62,40 +65,40 @@ class EventData{
         }
         if((e.code === 'Backspace' || e.code === 'Delete') && e.target.value.length === 1){
             if(e.target.id === 'hours'){
-                tempEventObj = tempEventObj.hour(23);
+                this._tempEventObj = this._tempEventObj.hour(23);
             }
             else{
-                tempEventObj = tempEventObj.minute(59);
+                this._tempEventObj = this._tempEventObj.minute(59);
             }
-            testFlag = true;
+            this._testFlag = true;
         }
     }
     
     handleChangeFocus(e){
         if((e.target.id === 'hours') && (e.target.selectionStart === 2)){
-            minutesForm.focus();
-            minutesForm.setSelectionRange(0, 0);
+            this._minutesForm.focus();
+            this._minutesForm.setSelectionRange(0, 0);
         }
         else if((e.target.id === 'minutes') && (e.code === 'Backspace') && (e.target.value.length === 0)){
-            hoursForm.focus();
+            this._hoursForm.focus();
         }
     }
     
     handleTimeForm(e){
         this.handleTimeValidation(e);
-        if(!testFlag){
+        if(!this._testFlag){
             if(e.target.id === 'hours'){
-                tempEventObj = tempEventObj.hour(parseInt(e.target.value));
+                this._tempEventObj = this._tempEventObj.hour(parseInt(e.target.value));
             }
             else{
-                tempEventObj = tempEventObj.minute(parseInt(e.target.value));
+                this._tempEventObj = this._tempEventObj.minute(parseInt(e.target.value));
             }
-            eventObj.date = tempEventObj.format();
+            this._eventObj.date = this._tempEventObj.format();
         }
         else{
-            testFlag = false;
+            this._testFlag = false;
         }
-        eventDateSummary.innerHTML = tempEventObj.format('DD.MM.YYYY [o godzinie] HH:mm');
+        this._eventDateSummary.innerHTML = this._tempEventObj.format('DD.MM.YYYY [o godzinie] HH:mm');
     }
     init(){
         const hoursForm = document.getElementById('hours');
