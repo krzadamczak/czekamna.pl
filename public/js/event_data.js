@@ -7,7 +7,7 @@ class EventData{
         this._eventNameSummary = document.getElementById('event-name');
         this._eventDateSummary = document.getElementById('event-date');
         this._eventObj = {};
-        this._tempEventObj = dayjs();
+        this._tempEventObj = dayjs().endOf('day').startOf('minute');
         this._testFlag = false;
     }
     handleEventName(e){
@@ -15,8 +15,9 @@ class EventData{
         this._eventNameSummary.innerHTML = this._eventObj.name;
     }
     handleCalendar(e){
-        this._tempEventObj = dayjs(e.target.dataset.date).endOf('day').startOf('minute');
-        this._eventObj.date = this._tempEventObj.format();
+        let tempDate = e.target.dataset.date.split('-');
+        this._tempEventObj =  this._tempEventObj.year(tempDate[0]).month(tempDate[1] - 1).date(tempDate[2]);
+        this._eventObj.endDate = this._tempEventObj.format();
         this._eventDateSummary.innerHTML = this._tempEventObj.format('DD.MM.YYYY [o godzinie] HH:mm');
     }
     handleTimeValidation(e){
@@ -66,7 +67,7 @@ class EventData{
             else{
                 this._tempEventObj = this._tempEventObj.minute(parseInt(e.target.value));
             }
-            this._eventObj.date = this._tempEventObj.format();
+            this._eventObj.endDate = this._tempEventObj.format();
         }
         else{
             this._testFlag = false;
@@ -80,7 +81,7 @@ class EventData{
             validationFlag = false;
         }
 
-        if(typeof this._eventObj.date === 'undefined'){
+        if(typeof this._eventObj.endDate === 'undefined'){
             this._eventDateSummary.innerHTML = 'Wybierz dzień na który czekasz.';
             validationFlag = false;
         }
@@ -95,6 +96,7 @@ class EventData{
     handleSave(e){
         if(this.handleValidationBeforeSave()){
             this._eventObj.urlID = Math.floor(((Math.random() * 10) * Date.now())).toString(16);
+            this._eventObj.startDate = dayjs().format();
             fetch('/', {
                 method: 'POST',
                 headers: {

@@ -26,25 +26,55 @@ class Countdown{
     constructor(){
         this._interval = 1000;
         this._itemsCreated = [];
-        this._timeUnitsMod = { second: 60, minute: 60, hour: 24, month: 12 }
+        this._timeUnitsMod = { second: 60, minute: 60, hour: 24, day: 7, week: 1024 }
         this._eventData = document.getElementById('event-data');
-        this._eventEndDate = dayjs(this._eventData.dataset.eventDate);
+        this._eventEndDate = dayjs(this._eventData.dataset.eventEndDate);
+        this._startDate = dayjs(this._eventData.dataset.startDate);
         this._smileWoman = document.getElementById('smile-woman');
         this._smileMan = document.getElementById('smile-man');
         this._blink = document.getElementById('blink');
         this._breath = document.getElementById('breath');
+        this._timeLeft = (this._eventEndDate.diff(dayjs(), 'second') >= 0) ? true : false;
+        this._countdownSection = document.getElementById('countdown-section');
+        this._secondCountdownSection = document.getElementById('second-countdown-section');
+        this._eventSection = document.getElementById('event-section');
+        this._shareSection = document.getElementById('share-section');
     }
     init(){
-        const visibleTimeUnits = this.checkTimeLeft();
-        const countdown = this.createCountdown(visibleTimeUnits);
+        if(this._timeLeft){
+            
+            let visibleTimeUnits = this.checkTimeLeft();
+            let countdown = this.createCountdown(visibleTimeUnits);
+            this._countdownSection.querySelector('.section__title').innerHTML = 'Do dnia którego wypatrujesz zostało:';
 
-        document.querySelector('.countdown').append(countdown);
+            this._countdownSection.querySelector('.section__content').append(countdown);
+    
+            this._itemsCreated = visibleTimeUnits.map(item => document.getElementById(item));
+            this.timer();            
+        }
+        else{
+            this.changeLayout();
+        }
+    }
+    changeLayout(){        
+        const sectionText = document.createElement('div');
+        const sectionLink = document.createElement('a');
+        
+        sectionLink.innerHTML = "Kliknij tutaj";
+        sectionLink.href = "/";
+        sectionLink.classList.add('section__link');
+        sectionText.classList.add('section__text');
+        sectionText.append(sectionLink, document.createTextNode(", żeby stworzyć nowe odliczanie. Nie zapomnij podzielić się ze znajomymi chwilą, której wypatrujesz."));
+        
+        this._eventSection.querySelector('.section__title').innerHTML = 'Doczekałeś się!';    
+        this._countdownSection.querySelector('.section__title').innerHTML = "Z pewnością jest coś, na co czekasz.";        
+        this._countdownSection.querySelector('.section__content').append(sectionText);
 
-        this._itemsCreated = visibleTimeUnits.map(item => document.getElementById(item));
-        this.timer();
+        this._secondCountdownSection.remove();
+        this._shareSection.remove();
     }
     checkTimeLeft(){
-        const timeUnits = ['year', 'month', 'day', 'hour', 'minute', 'second'];
+        const timeUnits = ['week', 'day', 'hour', 'minute', 'second'];
         const result = [];
         for(let timeUnit of timeUnits){
             if(this._eventEndDate.diff(dayjs(), timeUnit) >= 1){
@@ -54,9 +84,13 @@ class Countdown{
         return result;
     }
     createCountdown(visibleTimeUnits){
-        const result = document.createDocumentFragment();
-        const timeUnitsPL = {second: 'sekundy', minute: 'minuty', hour: 'godziny', day: 'dni', month: 'miesiące', year: 'lata'}    
+        // const result = document.createDocumentFragment();
+        const timeUnitsPL = {second: 'sekundy', minute: 'minuty', hour: 'godziny', day: 'dni', week: 'tygodnie'}        
+        const result = document.createElement('div');
         
+        result.classList.add('countdown');
+        console.log(countdown);
+
         for(let unit of visibleTimeUnits){
             const countdownInner = document.createElement('div');
             const countdownNumber = document.createElement('div');
@@ -75,31 +109,16 @@ class Countdown{
     
             result.append(countdownInner);
         }
+        // result.append(countdown);
+
         return result;
     }
     timer(){
         let t0 = performance.now();
-        let daysLeft, monthsLeft;
-        
-        if(this._eventEndDate.isAfter(dayjs(), 'month')){
-            let daysLeftFirstMonth = dayjs().endOf('month').diff(dayjs(), 'day', true);
-            let daysLeftLastMonth = this._eventEndDate.diff(this._eventEndDate.startOf('month'), 'day', true);
-            daysLeft = Math.floor(daysLeftFirstMonth + daysLeftLastMonth);
-        }
-        else{
-            daysLeft = this._eventEndDate.diff(dayjs(), 'day');
-        }
-        
+        this._timeLeft = (this._eventEndDate.diff(dayjs(), 'second') >= 0) ? true : false;
+
         for(let item of this._itemsCreated){
-            if(item.id === 'year'){
-                item.innerHTML = this._eventEndDate.diff(dayjs(), 'year');
-            }
-            else if(item.id === 'day'){
-                item.innerHTML = daysLeft;
-            }
-            else{
-                item.innerHTML = this._eventEndDate.diff(dayjs(), item.id) % this._timeUnitsMod[item.id];
-            }
+            item.innerHTML = this._eventEndDate.diff(dayjs(), item.id) % this._timeUnitsMod[item.id];
         }
     
         this._smileWoman.innerHTML = Math.ceil(this._eventEndDate.diff(dayjs(), 'second') / 1393);
@@ -109,8 +128,15 @@ class Countdown{
     
         let t1 = performance.now();
         let delta = t1 - t0;
-    
-        setTimeout(() => this.timer(), this._interval - delta);
+        
+        
+        if(this._timeLeft){
+            setTimeout(() => this.timer(), this._interval - delta); 
+        }
+        else{
+            this._countdownSection.querySelector('.countdown').remove();
+            this.init();
+        }
     }
 }
 

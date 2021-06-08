@@ -83,6 +83,7 @@ class Calendar{
                 this.markIfWeekend(day);
                 // this.markIfHoliday(day);
                 this.markCurrentDay(day);
+                this.markCurrentDayAsSelected(day);
             }
 
             result.append(day);
@@ -106,6 +107,12 @@ class Calendar{
     markCurrentDay(day){
         if(dayjs().toISOString().includes(day.dataset.date)){
             day.classList.add('calendar__day--current');
+        }
+    }
+    markCurrentDayAsSelected(day){
+        if(dayjs().toISOString().includes(day.dataset.date)){
+            day.classList.add('calendar__day--selected');
+            this._selectedDay = day;
         }
     }
     calculateEaster(){
@@ -191,15 +198,13 @@ class Calendar{
     dayListener(e){
         let event = new Event('daySelected', {bubbles: true});
 
-        if(this._selectedDay === undefined){
-            this._selectedDay = e.target;
-            this._selectedDay.classList.add('calendar__day--selected');
-        }
-        else{
-            this._selectedDay.classList.remove('calendar__day--selected');
-            this._selectedDay = e.target;
-            this._selectedDay.classList.add('calendar__day--selected');
-        }
+        // if(this._selectedDay === undefined){
+        //     this._selectedDay = e.target;
+        //     this._selectedDay.classList.add('calendar__day--selected');
+        // }
+        this._selectedDay.classList.remove('calendar__day--selected');
+        this._selectedDay = e.target;
+        this._selectedDay.classList.add('calendar__day--selected');
         this._selectedDay.dispatchEvent(event);
     }
     changeMonth(){
