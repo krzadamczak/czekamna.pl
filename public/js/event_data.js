@@ -1,26 +1,3 @@
-const saveButton = document.getElementById('save');
-
-saveButton.addEventListener('click', e => {
-    if(typeof eventObj.name === 'undefined'){
-        eventNameSummary.innerHTML = 'Twoje wydarzenie musi mieć nazwę. Przejdź na górę strony i napisz, na co czekasz.';
-    }
-    if(typeof eventObj.date === 'undefined'){
-        eventDateSummary.innerHTML = 'Wybierz dzień na który czekasz.';
-    }
-    if(typeof eventObj.name !== 'undefined' && typeof eventObj.date !== 'undefined'){
-        eventObj.urlID = Math.floor(((Math.random() * 10) * Date.now())).toString(16);
-        fetch('/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(eventObj)
-        }).then(res => res.json())
-          .then(data => console.log(data))
-          .then(window.location.href = `/${eventObj.urlID}`);
-    }
-});
-
 class EventData{
     constructor(){
         this._hoursForm = document.getElementById('hours');
@@ -30,7 +7,7 @@ class EventData{
         this._eventNameSummary = document.getElementById('event-name');
         this._eventDateSummary = document.getElementById('event-date');
         this._eventObj = {};
-        this._tempEventObj = dayjs().endOf('day').startOf('minute');
+        this._tempEventObj = dayjs();
         this._testFlag = false;
     }
     handleEventName(e){
@@ -38,16 +15,13 @@ class EventData{
         this._eventNameSummary.innerHTML = this._eventObj.name;
     }
     handleCalendar(e){
-        let tempDate = e.target.dataset.date.split('-');
-        this._tempEventObj = this._tempEventObj.date(parseInt(tempDate[2]));
-        this._tempEventObj = this._tempEventObj.month(parseInt(tempDate[1]) - 1); //Liczenie miesięcy w dayjs zaczyna się od 0, nie od 1.
-        this._tempEventObj = this._tempEventObj.year(parseInt(tempDate[0]));
+        this._tempEventObj = dayjs(e.target.dataset.date).endOf('day').startOf('minute');
         this._eventObj.date = this._tempEventObj.format();
         this._eventDateSummary.innerHTML = this._tempEventObj.format('DD.MM.YYYY [o godzinie] HH:mm');
     }
     handleTimeValidation(e){
-        let selection = e.target.selectionStart;
-        let max = (e.target.id === 'hours') ? 23 : 59;
+        const selection = e.target.selectionStart;
+        const max = (e.target.id === 'hours') ? 23 : 59;
     
         if(e.target.value.length === 3){ e.target.value = e.target.value.slice(0, -1); }
         e.target.setSelectionRange(selection, selection);
@@ -63,7 +37,7 @@ class EventData{
         if(!/(Home|End|Tab|Backspace|Delete)|[0-9]/.test(e.code)){
             e.preventDefault();
         }
-        if((e.code === 'Backspace' || e.code === 'Delete') && e.target.value.length === 1){
+        if((e.code === 'Backspace' || e.code === 'Delete') && (e.target.value.length === 1 || (e.target.selectionStart === 0 && e.target.selectionEnd === 2))){
             if(e.target.id === 'hours'){
                 this._tempEventObj = this._tempEventObj.hour(23);
             }
@@ -82,8 +56,7 @@ class EventData{
         else if((e.target.id === 'minutes') && (e.code === 'Backspace') && (e.target.value.length === 0)){
             this._hoursForm.focus();
         }
-    }
-    
+    }    
     handleTimeForm(e){
         this.handleTimeValidation(e);
         if(!this._testFlag){
@@ -100,28 +73,68 @@ class EventData{
         }
         this._eventDateSummary.innerHTML = this._tempEventObj.format('DD.MM.YYYY [o godzinie] HH:mm');
     }
+    handleValidationBeforeSave(e){
+        let validationFlag = true;
+        if(typeof this._eventObj.name === 'undefined'){
+            this._eventNameSummary.innerHTML = 'Twoje wydarzenie musi mieć nazwę. Przejdź na górę strony i napisz, na co czekasz.';
+            validationFlag = false;
+        }
+
+        if(typeof this._eventObj.date === 'undefined'){
+            this._eventDateSummary.innerHTML = 'Wybierz dzień na który czekasz.';
+            validationFlag = false;
+        }
+
+        if(this._tempEventObj.isBefore(dayjs())){
+            this._eventDateSummary.innerHTML = 'Nie możesz odliczać do momentu, który już minął.';
+            validationFlag = false;
+        }
+
+        return validationFlag;
+    }
+    handleSave(e){
+        if(this.handleValidationBeforeSave()){
+            this._eventObj.urlID = Math.floor(((Math.random() * 10) * Date.now())).toString(16);
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this._eventObj)
+            }).then(res => res.json())
+              .then(data => console.log(data))
+              .then(window.location.href = `/${this._eventObj.urlID}`);
+        }
+    }
     init(){
         const hoursForm = document.getElementById('hours');
         const timeFormColon = document.querySelector('.time-form__colon');
         const minutesForm = document.getElementById('minutes');
         const eventNameInput = document.getElementById('event-name-input');
         const calendar = document.querySelector('.calendar');
+        const saveButton = document.getElementById('save');
         
         const handleEventNameRef = this.handleEventName.bind(this);
         const handleCalendarRef = this.handleCalendar.bind(this);
         const handleKeyValidationRef = this.handleKeyValidation.bind(this);
         const handleChangeFocusRef = this.handleChangeFocus.bind(this);
         const handleTimeFormRef = this.handleTimeForm.bind(this);
+        const handleSaveRef = this.handleSave.bind(this);
 
-        eventNameInput.addEventListener('input', handleEventNameRef);
+        
         calendar.addEventListener('daySelected', handleCalendarRef);
+
         hoursForm.addEventListener('keydown', handleKeyValidationRef);
         minutesForm.addEventListener('keydown', handleKeyValidationRef);
+
         hoursForm.addEventListener('keyup', handleChangeFocusRef);
         minutesForm.addEventListener('keyup', handleChangeFocusRef);
+
+        eventNameInput.addEventListener('input', handleEventNameRef);
         hoursForm.addEventListener('input', handleTimeFormRef);
         minutesForm.addEventListener('input', handleTimeFormRef);
 
+        saveButton.addEventListener('click', handleSaveRef);
         timeFormColon.addEventListener('click', () => hoursForm.focus());
     }
 }

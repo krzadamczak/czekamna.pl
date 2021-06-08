@@ -189,7 +189,7 @@
     font-size: var(--small-font-size);
     color: var(--main-font-color);
     margin: 0 50px;
-    width: 200px;
+    width: 205px;
     text-align: center;
     font-weight: 700;
 }
@@ -389,7 +389,6 @@
     .calendar__month-name{
         font-size: var(--small-font-size);
         margin: 0px;
-        width: 210px;
     }
     .label{
         font-size: var(--tiny-font-size);
